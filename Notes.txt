@@ -1,0 +1,208 @@
+Educative.io: JavaScript in Detail: From Beginner to Advanced
+Mini Project #2: Maze Solver
+
+Background
+
+Programmers create many games, like board games and first-person shooters. Most games have a
+primary goal. Once achieved, the player wins the game. One common gaming problem is maze solving.
+Take, for example, Pac-Man. The player traverses a maze to reach the treat. The end goal is to
+reach every treat in the maze. Level by level, the maze gets more and more complicated. Let’s see
+how to automate this task!
+
+Introduction to Maze Solving
+
+Maze solving is a simple programming problem. It requires users to traverse a given maze and see
+if a certain target position can or cannot be reached through a valid path. To automate the task,
+the computer needs a technique to traverse the maze and exhaustively search for a certain path.
+One technique to exhaustive search is depth-first search.
+
+Depth-first Search
+
+Depth-first search (DFS) is an algorithm for traversing or searching a data structure. The
+algorithm starts at one position and traverses as deep as possible in one direction while doing
+the same for other directions. This goes on until the goal is reached or all possible paths have
+been exhaustively searched.
+
+Problem Description
+
+A gaming company YAMCO created a game called Mind the App where players solve puzzles to advance
+to the next level. Part of the game called BACMAN is designed for players to complete a maze in
+record time. Some designers are struggling to create multiple variants of the maze. Some mazes are
+unsolvable while others are too easy. The chief of designers has assigned you to create a solution
+in JavaScript which can take or generate any maze to tell if it is solvable.
+
+Task
+
+Use your JavaScript knowledge to create a solution that tells if a given maze is, or is not
+solvable. This way, the chief of designers can prevent her team from wasting their time on failed
+mazes.
+
+Step 1A: Creating a Maze
+
+Task
+In this task, you will map a maze onto a two-dimensional array while creating a class called the
+Grid. The mapping was done by the company’s design team along with an incomplete class. The
+primary goal of this task is to make a copy of the two-dimensional array passed to the constructor
+and assign it to the property of the class so we have our own two-dimensional array.
+
+Problem Statement
+To complete this task, write code to complete making the constructor of the class Grid. The
+constructor function is passed a two-dimensional array, which is a mapping of the maze.
+
+Within the two-dimensional array, there are values of either 0 or 1. Each 1 value means the index
+is a valid index and traversable. On the other hand, 0 means it is an invalid position and cannot
+be traversed.
+
+Your task:
+
+Take the two-dimensional array arr and create a copy.
+Make a copy of both the outer and inner arrays of the two-dimensional array arr.
+Ensure that the dimensions do not change.
+Assign the copied array to this.grid.
+
+The provided Grid class outline, along with a helper function printArray, prints the two-
+dimensional array. Focus on copying the two-dimensional array. At the same time, use helper
+functions like printArray to assist you.
+
+Step 1B: Creating Random Maze by Default
+
+Task
+In this task, you will make additions to the constructor function of the class Grid. When no array
+is passed to the constructor function, the arr argument’s value is undefined. Your task is to
+still initialize a two-dimensional array with randomized values and static size to this.grid.
+
+Problem Statement
+To complete this task, write code that makes additions to the constructor of the class Grid. The
+constructor function is passed a two-dimensional array, which is a mapping of the maze. However,
+when this two-dimensional array arr is undefined (no argument is passed when creating the object
+of class Grid), create a two-dimensional array with the following features:
+
+It has a 6x6 dimension.
+
+All values are assigned randomly to either 1 or 0. Use Math.random() to generate random numbers.
+
+The new random two-dimensional array is assigned to this.grid. The class for Grid is given, with
+the constructor having code to copy arr when not undefined. Add code for randomly generating the
+two-dimensional array for when the arr value is undefined.
+
+Step 2: Creating MazeSolver
+
+Task
+In this task, create a new class MazeSolver, which solves the maze. The class will have the
+necessary methods and properties to complete the project. Since we need the Grid class for the
+maze, we will derive the new class out of it. Have your inheritance concepts ready!
+
+Problem statement
+To complete this task, create a new class MazeSolver, which inherits the Grid class. The
+constructor of the MazeSolver class takes only one argument arr, just like the Grid class.
+Create a MazeSolver class derived from the Grid class. The MazeSolver class will not have its own
+properties, but instead use the constructor of the Grid class.
+
+Step 3: Finding Traversable Indices
+
+Task
+Now that we created the MazeSolver class, we can make methods that help us solve the maze. We
+need a method that, for a given index (pair with the index of the outer array and index of the
+inner array), can tell if it is a valid position in the grid property. This helps traverse the
+array while ensuring we traverse only valid coordinates.
+
+Problem Statement
+Now, complete the method of the class MazeSolver. The method is called canTraverse and will take
+the pair of indices, x and y, mapped on to the two-dimensional array assigned to the grid
+property.
+
+The pair of indices x and y need the following features:
+
+The x index is within the bounds of this.grid array.
+The y index is within the bounds of this.grid[x] array.
+The value of this.grid[x][y] is 1 because only the 1 values are traversable on the maze.
+
+If the above features are satisfied, return a boolean value of true. Otherwise, return a boolean
+value of false.
+
+Step 4: Finding Neighbouring Traversable Indices
+
+Task
+We now have a method to ensure if an indexed position is or is not valid through the carTraverse
+method. We can move onto the next step: finding the positions which can be traversed from a
+source index. We cannot randomly traverse all positions of the two-dimensional array because,
+like in the real maze, there are constraints to movements. Create a method called getNeighbours 
+which supplies a list of all traversable indices from a source index while considering
+constraints.
+
+Problem Statement
+To complete this task, write code to find the indices that can be traversed from a certain index.
+
+In the maze, there are movement constraints. The user is restricted by the following rules:
+
+Users can move immediately left, right, up, and down.
+Users cannot go out of bounds.
+Users cannot move onto positions with a value of 0.
+Considering these constraints, write code for the method getNeighbours that takes a source
+position (x and y) and returns an array of traversable positions. Use the canTraverse method to
+check if a position is traversable.
+
+Step 5: Checking If an Index Is Already Visited
+
+Task
+Create a method that keeps us from visiting the same positions again. We need to prevent
+infinitely traversing the same positions. In this task, create the checkVisited method, which
+takes a position and cross-check it against an array of previously visited positions. Eventually,
+it returns a boolean value that tells if the target position is or is not in the array of visited
+indices.
+
+Problem Statement
+To complete this task, check if the indices (x and y) passed as argument do exist in the array of
+indices visited passed as an argument. The array visited has these properties:
+
+It is an array of positions.
+Each position is an array of two elements (x and y) representing a position in the maze this.grid.
+
+Traverse the array visited and see if there is a subarray with the coordinates the same as x and
+y passed as the argument. The function should return true if it does exist, false if it does not.
+
+Step 6: Check if Maze is Solvable
+
+Task
+In this task, you will solve the maze with the method called solve. Use all the helper functions
+created so far to assist you. The task takes some time but remember the chief of designers really
+trusts you. Don’t let her down!
+
+Problem statement
+To complete this task, write the code to see if in a given maze this.grid, is a target position
+reachable from a source position given (x1 and y1) through a certain path. The constraints are:
+
+The step can only go four directions (up, down, left, and right) and can only move onto the
+position where the value is 1. These constraints are covered by the canTraverse method. Your task
+is to traverse the maze (this.grid) exhaustively to see if the target position is or is not
+reachable. However, if you traverse blindly, you may traverse the same positions infinitely or
+not exhaustively search all possible positions. So, use the depth-first search algorithm.
+
+DFS algorithm:
+The depth-first search (DFS) algorithm requires an array which we have named as stack and within
+which we add and remove positions as we traverse the maze. Additionally, we need an array to keep
+track of previously visited positions. Using the two, the algorithm works as follows.
+
+Create the following:
+
+Stack as an empty array of positions
+An empty array of visited positions
+Given the initial valid position (x1 and y1), (canTraverse would help here), add it into the
+stack array, using push method of the array. Add it to the array managing visited positions.
+
+Loop over the stack array until it is empty.
+
+In each iteration of the loop, remove one element from the stack with the pop method of the array.
+
+Check if the target location (x2 and y2) returns true.
+
+For the invalid position, get all valid adjacent positions that can be traversed (getNeighbours
+will help).
+
+With all neighboring positions, filter the not visited by cross-checking against the array that
+holds visited positions (checkVisited is helpful here). For the unvisited, add them to the array
+with the already visited positions. Push them to the stack array for traversing later.
+
+The loop continues from step 4 until either the function returns true (meaning a path exists) or
+the loop terminates as the maze has been exhaustively searched. Then, we return false (meaning a
+path does not exist).

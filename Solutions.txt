@@ -1,0 +1,93 @@
+Solution to Sub-task: Creating a Maze
+
+The task is broken into two parts. Copy arr and assign it to grid property. But if arr was
+undefined, just assign grid to a randomly generated array. The constructor takes one argument:
+arr, where the condition on line 3 checks if its value is undefined or not. If the conditional is
+true a randomly generated array of fixed dimensions is assigned where the
+Math.round(Math.random()) generates numbers between 1 and 0. If arr is not undefined, create a
+copy of the array by traversing it and copying the inner array using the slice method. In both
+cases, the arrays are assigned to this.grid to make the array the property of the constructed
+object.
+
+Solution to Sub-task: Creating MazeSolver
+
+To inherit the Grid class, use extends keyword while declaring the MazeSolver class. Then, to
+trigger the constructor of the Grid class and initializing its properties, use the super function
+inside the constructor function of the MazeSolver class. Now, the object created from the
+MazeSolver class has all the properties.
+
+Solution to Sub-task: Finding Traversable Indices
+
+Before traversing any index, ensure that a given index is valid. For this, implement the method
+canTraverse. First, check for bounds by checking arguments. The bounds check if either variable is
+negative or greater than or equal to the length of the array. The variable x is the outer array
+index and can be accessed through grid[x]. Meanwhile, the variable y is the inner array index and
+can be accessed through grid[x][y]. The variable y is checked after x because the y index cannot
+be used until after indexing x in grid property. Finally, the code checks for a given valid x and
+y value if the indexed value is numeric 1 or 0 in the two-dimensional array assigned to grid. If
+it returns true, it is 1. In any other case, false is returned.
+
+Solution to the Sub-task: Finding Neighboring Traversable Indices
+
+For any index in the two-dimensional array (this.grid), we need to know the possible indices that
+can move to the array. This is where getNeighbours method comes in. Given that the user can move
+in only four directions, each value can be accessed as follows.
+
+Up: [x-1, y]
+Down: [x+1, y]
+Left: [x, y-1]
+Right: [x, y+1]
+
+Because each update can lead to out of bounds indices or a value other than 1, use the canTraverse
+method. For each pair of indices, call the canTraverse method and push it into our final array
+neighbours if the method returns true. Finally, the array is returned with all the legal pairs of
+indices.
+
+Solution to Sub-task: Checking if an Index is Already Visited
+
+Sometimes while traversing we visit the same indices again and again. To prevent this, we maintain
+an array of all visited indices and refer back to it. To assist us, we can use the method
+checkVisited implemented. The foundation of the implementation is traversing the array visited
+passed as an argument. For each element of the array at index i, the value of x is cross-checked
+against visited[i][0]. The value of y is cross-checked against visited[i][1]. Only when the two
+are equal (line 44), the function returns true. Failure to find such a condition terminates the
+loop and returns false. This means that the pair of x and y does not exist in the visited array
+passed as an argument.
+
+Solution to Sub-task: Check if Maze is Solvable
+
+With helper methods ready and the maze in front of us, we can finally implement a solution. The
+method solve takes the source and target indices and to tell if the maze is solvable. The solve
+method takes 2 pairs of coordinates; x1 and y1are the source while x2 and y2are the destination
+indices. The solution works like this.
+
+Initialize an empty array to track which indices to traverse next by the name of stack.
+
+Initialize an empty array to track which indices have been visited by the name of visited.
+
+Check if the source is traversable using the canTraverse method. Add it to the stack array and
+visited array given a valid index.
+
+Initialize a boolean variable solved and initialize it to false where this variable will be a
+reference to if the maze is solvable.
+
+Run a while loop that terminates when the stack array is empty. In each iteration, do the
+following.
+
+Remove one element from the stack array using the pop method.
+
+If the removed element is the destination, then assign true to solved and exit the while loop.
+
+If the removed element is not the target destination then get traversable indices from it using
+the getNeighbours method. For each element of the neighbor, do this.
+
+Check if the neighbor is already visited by cross-checking against the visited array using the
+method checkVisited. For those not already visited, add to visited array and stack array so they
+can be traversed in later iterations.
+
+The loop either ends when the stack is empty or continues to iterate for the newly added or
+remaining coordinates in stack array.
+
+Once the loop terminates, the solved variable will have the value of true. This means it
+successfully found the destination. false means it failed to reach the destination. Either way,
+the solved variable is returned and we have solved the problem.
